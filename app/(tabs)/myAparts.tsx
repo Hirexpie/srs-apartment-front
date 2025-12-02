@@ -11,16 +11,18 @@ import {
     View,
 } from "react-native";
 
-export default function ApartmentsScreen() {
+export default function MyApartmentsScreen() {
     const [apartments, setApartments] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [isSales, setIsSales] = useState(false); // 🔁 false = аренда, true = покупка
+    const [isSales, setIsSales] = useState(false);
 
     const fetchApartments = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await api.get("/apart/");
+            const { data } = await api.get("/apart/my");
             setApartments(data);
+            console.log(data);
+
         } catch (err) {
             console.error("Ошибка загрузки квартир:", err);
         } finally {
